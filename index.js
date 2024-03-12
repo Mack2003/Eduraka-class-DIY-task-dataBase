@@ -3,6 +3,7 @@ const app = express()
 const mongoos = require('mongoose')
 const cors = require('cors');
 const Razorpay = require('razorpay')
+require('dotenv').config()
 
 app.use(cors({
     "origin": "http://localhost:3000",
@@ -13,7 +14,7 @@ app.use(cors({
 app.use(express.json());
 
 mongoos.connect('mongodb://localhost:27017/zomato').then(() => {
-    app.listen(2000, (err) => err ? console.log(`There is an error while running the server: ${err}`) : console.log(`Server is running on port number 2000...`))
+    app.listen(process.env.CYCLIC_URL || 2000, (err) => err ? console.log(`There is an error while running the server: ${err}`) : console.log(`Server is running on port number 2000...`))
 }).catch(err => {
     console.log('Unable to connect to mongoDB...')
 })
