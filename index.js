@@ -13,7 +13,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-mongoos.connect('mongodb://localhost:27017/zomato').then(() => {
+mongoos.connect(process.env.DB_LINK).then(() => {
     app.listen(process.env.CYCLIC_URL || 2000, (err) => err ? console.log(`There is an error while running the server: ${err}`) : console.log(`Server is running on port number 2000...`))
 }).catch(err => {
     console.log('Unable to connect to mongoDB...')
